@@ -2,7 +2,7 @@
     var shoppingCart = [];
     var cart_total_price=0;
     var orderedProductsTblBody;
-    var GetRandomNumber;
+    
     //this function manipulates DOM and displays content of our shopping cart
    
     
@@ -49,7 +49,7 @@ function displayShoppingCart()
             count++;
 
         }
-        //fill total cost of our shopping cart
+        
         document.getElementById("cart_total").innerHTML=cart_total_price;
     }
 
@@ -72,10 +72,9 @@ function AddtoCart()
        singleProduct.sft = document.getElementById("PrintHeight").value * document.getElementById("PrintWide").value;
        singleProduct.AddedFrame=document.getElementById("Addedframe").value;
        singleProduct.FramePrice=document.getElementById("framePrice").value;
-       //singleProduct.Price="50";
-       //Add newly created product to our shopping cart
+       
        shoppingCart.push(singleProduct);
-       //call display function to show on screen
+       
        displayShoppingCart();
 
     }
@@ -89,12 +88,16 @@ function AddtoCart()
     function record()
     {
 
-         var billNo = GenerateRandomValue().toString();
          
-        for(var product in shoppingCart)
-        {
+         
 
 
+
+         
+            for(var product in shoppingCart)
+            {
+
+                var billNo = "1";
                
                 var RECname = shoppingCart[product].Name.toString();
                 var RECaddress = shoppingCart[product].Addresss.toString();
@@ -109,44 +112,47 @@ function AddtoCart()
                 var RECFrame = shoppingCart[product].AddedFrame.toString();
                 var RECFramePrice = shoppingCart[product].FramePrice.toString();
                 var RECPrintTotalprice = cart_total_price.toString();
-                // var text ={BillNo:billNo,
-                //             ClientName:RECname,
-                //             ClientAddress:RECaddress,
-                //             ClientPhn:RECphn,
-                //             PrintType:RECprintType,
-                //             PrintHeight:RECheight,
-                //             PrintWide:RECwide,
-                //             PrintQuantity:RECQunt,
-                //             PrintPrice:RECprice,
-                //             sft:RECsft,
-                //             advancePay:RECAdvance,frame:+RECFrame,framePrice:RECFramePrice,InTotalCartPricce:RECPrintTotalprice
-                //         };
+               
+                var dataString = 'BillNo='+ billNo
+                        + '&ClientName=' + RECname        
+                        + '&ClientAddress=' + RECaddress
+                        + '&ClientPhn=' + RECphn
+                        + '&PrintType=' + RECprintType
+                        + '&PrintHeight=' + RECheight
+                        + '&PrintWide=' + RECwide
+                        + '&PrintQuantity=' + RECQunt
+                        + '&PrintPrice=' + RECprice
+                        + '&sft=' + RECsft
+                        + '&advancePay=' + RECAdvance
+                        + '&frame=' + RECFrame
+                        + '&framePrice=' + RECFramePrice
+                        + '&InTotalCartPricce=' + RECPrintTotalprice
 
-                var text ='{"BillNo":"'+billNo+'","ClientName":"'+RECname+'","ClientAddress":"'+RECaddress+'","ClientPhn":"'+RECphn+'","PrintType":"'+RECprintType+'","PrintHeight":"'+RECheight+'","PrintWide":"'+RECwide+'","PrintQuantity":"'+RECQunt+'","PrintPrice":"'+RECprice+'","sft":"'+RECsft+'","advancePay":"'+RECAdvance+'","frame":"'+RECFrame+'","framePrice":"'+RECFramePrice+'","InTotalCartPricce":"'+RECPrintTotalprice+'"}';
-                var obj = JSON.parse(text);
-                try{
+
+
+                //var text ='{"BillNo":"'+billNo+'","ClientName":"'+RECname+'","ClientAddress":"'+RECaddress+'","ClientPhn":"'+RECphn+'","PrintType":"'+RECprintType+'","PrintHeight":"'+RECheight+'","PrintWide":"'+RECwide+'","PrintQuantity":"'+RECQunt+'","PrintPrice":"'+RECprice+'","sft":"'+RECsft+'","advancePay":"'+RECAdvance+'","frame":"'+RECFrame+'","framePrice":"'+RECFramePrice+'","InTotalCartPricce":"'+RECPrintTotalprice+'"}';
+                //var obj = JSON.parse(text);
                 $.ajax({
-                    type: 'POST',
+                    type: 'post',
                     url: 'PrintOderPHP.php',
                     //data: $('form').serialize(),
-                    data : obj,
+                    data : dataString,
+                    
                     success: function () 
                     {
-                        ClearHtmlElement();
+                        
                         alert('form was submitted');
 
-                    },
-                    fail: function( ) {
-                     console.log('Could not get posts, server response');
-                    }               
+                    }             
                 });
-                }catch(err){
-                    alert(err);
-                }
-
-        }
-
-
+                   for(var timer = 0;timer<200;timer++){
+                        console.log(timer);
+                    }    
+            }
+            
+            
+      
+             ClearHtmlElement(); 
     }
 
 function PrintElem()
@@ -190,11 +196,11 @@ function ClearHtmlElement()
 
 function GenerateRandomValue()
 {
-    var a = Math.random();
-    var b = Math.random();
-	var start = Date.now(); 
-    return GetRandomNumber = Math.floor((Math.random() * 70) + 15 + start + a+b);
+    var tempi ; 
     
+    
+    
+    return  GetRandomNumber = Math.floor((Math.random() * 70000));
 
 }
 
