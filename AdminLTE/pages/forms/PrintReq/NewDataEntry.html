@@ -7,7 +7,7 @@
 
     <script src="../../../../jquery-1.9.1.js"></script>
 
-    <script src="../../../corejsfile/Workprocess.js"></script>
+    <script src="Workprocess.js"></script>
 
     <title>AdminLTE 2 | Dashboard</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
@@ -181,6 +181,19 @@
                       <input type="number" class="form-control" id="PrintAdvancePay" placeholder="Advance">
                     </div>  
 
+                     <div class="form-group">
+                      <label>Select Print Type</label>
+                      <select class="form-control" id="Addedframe">
+                        <option>Yes</option>
+                        <option selected>No</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Frame Price</label>
+                      <input type="number" class="form-control" id="framePrice" placeholder="Advance">
+                    </div>  
+
 
                   </div><!-- /.box-body -->
 
@@ -188,6 +201,10 @@
                     <input name="SendValue" type="button" value="Add to list" onclick="AddtoCart()" class="btn btn-primary"></input>
                     
                     <input name="ClearField" type="button" value="Clear Field" onclick="ClearHtmlElement()" class="btn btn-default"></input>
+                    
+                    <input name="submit" type="submit" value="Submit" onclick="record()" class="btn btn-default" ></input>
+        
+                  
                   </div>
                 </form>
               </div><!-- /.box -->
@@ -251,8 +268,7 @@
                 </div><!-- /.box-body -->
                
               </div>
-
-          </div>   <!-- /.row -->
+            </div>   <!-- /.row -->
                   
 
 

@@ -86,17 +86,16 @@ function AddtoCart()
     //AddtoCart("Door","Big yellow door",150);
     //AddtoCart("Car","Ferrari S23",150000);
 
-
-function recoed()
+    function record()
     {
 
          var billNo = GenerateRandomValue().toString();
-
+         
         for(var product in shoppingCart)
         {
 
 
-
+               
                 var RECname = shoppingCart[product].Name.toString();
                 var RECaddress = shoppingCart[product].Addresss.toString();
                 var RECphn = shoppingCart[product].PhoneNo.toString();
@@ -109,21 +108,41 @@ function recoed()
                 var RECAdvance = shoppingCart[product].AdvancePay.toString();
                 var RECFrame = shoppingCart[product].AddedFrame.toString();
                 var RECFramePrice = shoppingCart[product].FramePrice.toString();
-                var RECPrintTotalprice = cart_total_price;
+                var RECPrintTotalprice = cart_total_price.toString();
+                // var text ={BillNo:billNo,
+                //             ClientName:RECname,
+                //             ClientAddress:RECaddress,
+                //             ClientPhn:RECphn,
+                //             PrintType:RECprintType,
+                //             PrintHeight:RECheight,
+                //             PrintWide:RECwide,
+                //             PrintQuantity:RECQunt,
+                //             PrintPrice:RECprice,
+                //             sft:RECsft,
+                //             advancePay:RECAdvance,frame:+RECFrame,framePrice:RECFramePrice,InTotalCartPricce:RECPrintTotalprice
+                //         };
+
                 var text ='{"BillNo":"'+billNo+'","ClientName":"'+RECname+'","ClientAddress":"'+RECaddress+'","ClientPhn":"'+RECphn+'","PrintType":"'+RECprintType+'","PrintHeight":"'+RECheight+'","PrintWide":"'+RECwide+'","PrintQuantity":"'+RECQunt+'","PrintPrice":"'+RECprice+'","sft":"'+RECsft+'","advancePay":"'+RECAdvance+'","frame":"'+RECFrame+'","framePrice":"'+RECFramePrice+'","InTotalCartPricce":"'+RECPrintTotalprice+'"}';
                 var obj = JSON.parse(text);
-                
+                try{
                 $.ajax({
-                    type: 'post',
-                    url: '../../PHP/PrintOderPHP.php',
+                    type: 'POST',
+                    url: 'PrintOderPHP.php',
                     //data: $('form').serialize(),
                     data : obj,
                     success: function () 
                     {
+                        ClearHtmlElement();
                         alert('form was submitted');
-                    }
 
+                    },
+                    fail: function( ) {
+                     console.log('Could not get posts, server response');
+                    }               
                 });
+                }catch(err){
+                    alert(err);
+                }
 
         }
 
@@ -174,7 +193,7 @@ function GenerateRandomValue()
     var a = Math.random();
     var b = Math.random();
 	var start = Date.now(); 
-    GetRandomNumber = Math.floor((Math.random() * 70) + 15 + start + a+b);
+    return GetRandomNumber = Math.floor((Math.random() * 70) + 15 + start + a+b);
     
 
 }

@@ -2,8 +2,13 @@
     var shoppingCart = [];
     var cart_total_price=0;
     var orderedProductsTblBody;
+    var GetRandomNumber;
     //this function manipulates DOM and displays content of our shopping cart
-    function displayShoppingCart(){
+   
+    
+
+function displayShoppingCart()
+    {
         orderedProductsTblBody=document.getElementById("orderedProductsTblBody");
         //ensure we delete all previously added rows from ordered products table
         while(orderedProductsTblBody.rows.length>0) {
@@ -49,7 +54,8 @@
     }
 
 
-    function AddtoCart(){
+function AddtoCart()
+    {
        //Below we create JavaScript Object that will hold three properties you have mentioned:    Name,Description and Price
        var singleProduct = {};
        //Fill the product object with data
@@ -62,8 +68,10 @@
        singleProduct.Wide=document.getElementById("PrintWide").value;
        singleProduct.Quantity=document.getElementById("PrintQuantity").value;
        singleProduct.Price=document.getElementById("PrintPrice").value;
+       singleProduct.AdvancePay=document.getElementById("PrintAdvancePay").value;
        singleProduct.sft = document.getElementById("PrintHeight").value * document.getElementById("PrintWide").value;
-       
+       singleProduct.AddedFrame=document.getElementById("Addedframe").value;
+       singleProduct.FramePrice=document.getElementById("framePrice").value;
        //singleProduct.Price="50";
        //Add newly created product to our shopping cart
        shoppingCart.push(singleProduct);
@@ -78,42 +86,55 @@
     //AddtoCart("Door","Big yellow door",150);
     //AddtoCart("Car","Ferrari S23",150000);
 
-    function recoed(){
+    function record()
+    {
+
+         var billNo = GenerateRandomValue().toString();
+
+        for(var product in shoppingCart)
+        {
 
 
-                for(var product in shoppingCart){
-
-
-
+               
                 var RECname = shoppingCart[product].Name.toString();
                 var RECaddress = shoppingCart[product].Addresss.toString();
                 var RECphn = shoppingCart[product].PhoneNo.toString();
                 var RECprintType = shoppingCart[product].PrintType.toString();
                 var RECheight = shoppingCart[product].Height.toString();
-                 var RECwide = shoppingCart[product].Wide.toString();
-                  var RECsft = shoppingCart[product].sft.toString();
-                   var RECprice = shoppingCart[product].Price.toString();
-                    var RECQunt = shoppingCart[product].Quantity.toString();
-                     var RECTotalPrice = cart_total_price;
-                var text ='{"name":"'+RECname+'","address":"'+RECaddress+'","phnNo":"'+RECphn+'","printType":"'+RECprintType+'","height":"'+RECheight+'","wide":"'+RECwide+'","quntity":"'+RECQunt+'","price":"'+RECprice+'","sft":"'+RECsft+'","InTotalPrice":"'+RECTotalPrice+'"}';
+                var RECwide = shoppingCart[product].Wide.toString();
+                var RECsft = shoppingCart[product].sft.toString();
+                var RECprice = shoppingCart[product].Price.toString();
+                var RECQunt = shoppingCart[product].Quantity.toString();
+                var RECAdvance = shoppingCart[product].AdvancePay.toString();
+                var RECFrame = shoppingCart[product].AddedFrame.toString();
+                var RECFramePrice = shoppingCart[product].FramePrice.toString();
+                var RECPrintTotalprice = cart_total_price.toString();
+                var text ='{"BillNo":"'+billNo+'","ClientName":"'+RECname+'","ClientAddress":"'+RECaddress+'","ClientPhn":"'+RECphn+'","PrintType":"'+RECprintType+'","PrintHeight":"'+RECheight+'","PrintWide":"'+RECwide+'","PrintQuantity":"'+RECQunt+'","PrintPrice":"'+RECprice+'","sft":"'+RECsft+'","advancePay":"'+RECAdvance+'","frame":"'+RECFrame+'","framePrice":"'+RECFramePrice+'","InTotalCartPricce":"'+RECPrintTotalprice+'"}';
                 var obj = JSON.parse(text);
+                try{
                 $.ajax({
-                type: 'post',
-                url: 'PHP/PrintOderPHP.php',
-                //data: $('form').serialize(),
-                data : obj,
-                success: function () {
-                    alert('form was submitted');
-                    }
-
+                    type: 'POST',
+                    url: 'PrintOderPHP.php',
+                    //data: $('form').serialize(),
+                    data : obj,
+                    success: function () 
+                    {
+                        alert('form was submitted');
+                    },
+                    fail: function( ) {
+                     console.log('Could not get posts, server response');
+                    }               
                 });
+                }catch(err){
+                    alert(err);
+                }
 
         }
 
 
-      }
+    }
 
-      function PrintElem()
+function PrintElem()
         {
             var mywindow = window.open('', 'PRINT', 'height=400,width=600');
 
@@ -136,7 +157,8 @@
     }
 
 
-    function ClearHtmlElement(){
+function ClearHtmlElement()
+{
 
        document.getElementById("ClientName").value = "";
        document.getElementById("ClientAddress").value = "";
@@ -145,6 +167,19 @@
        document.getElementById("PrintWide").value = "";
        document.getElementById("PrintQuantity").value = "";
        document.getElementById("PrintPrice").value = "";
+       document.getElementById("PrintAdvancePay").value = "";
 
-    }
+}
+
+
+
+function GenerateRandomValue()
+{
+    var a = Math.random();
+    var b = Math.random();
+	var start = Date.now(); 
+    return GetRandomNumber = Math.floor((Math.random() * 70) + 15 + start + a+b);
+    
+
+}
 
