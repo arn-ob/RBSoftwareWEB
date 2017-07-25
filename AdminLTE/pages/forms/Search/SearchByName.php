@@ -97,11 +97,22 @@ if (!$query) {
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="#"><i class="fa fa-circle-o"></i>New Data Entry</a></li>
+                <li class="active"><a href="../PrintReq/NewDataEntry.html"><i class="fa fa-circle-o"></i>New Data Entry</a></li>
                  </ul>
             </li>
-           
-           
+
+            <li class="treeview active">
+              <a href="#">
+                <i class="fa fa-edit"></i> <span>Search Data</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li class="active"><a href="#"><i class="fa fa-circle-o"></i>Display All Data</a></li>
+                <li ><a href="Due.php"><i class="fa fa-circle-o"></i>Display Due</a></li>
+              </ul>
+            </li>
+
+
           </ul>
         </section>
         <!-- /.sidebar -->
@@ -118,8 +129,9 @@ if (!$query) {
           <ol class="breadcrumb">
             <li><a href="../../index.html"><i class="fa fa-dashboard"></i> Home</a></li>
             <li><a href="#">Forms</a></li>
-            <li class="active">New Data Entry</li>
+            <li >New Data Entry</li>
           </ol>
+          
         </section>
 
 
