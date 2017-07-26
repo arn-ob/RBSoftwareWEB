@@ -1,31 +1,39 @@
-<?php
-include 'DBInfo.php';
-
-$condfitions = $_POST["searchID"];
-
-$sql = 'SELECT * FROM newdataentry where ClientName='.$condfitions.'' ;
-		
-$query = mysqli_query($conn, $sql);
-
-if (!$query) {
-	die ('SQL Error: ' . mysqli_error($conn));
-}
-
-	
-
-
-?>
-
-
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
+    <script>
+      function showResult(str) {
+    if (str.length==0) {
+        document.getElementById("livesearch").innerHTML="";
+        
+        return;
+    }
+    if (window.XMLHttpRequest) {
+    // code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+    } else {  // code for IE6, IE5
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+  xmlhttp.onreadystatechange=function() {
+    if (this.readyState==4 && this.status==200) {
+      document.getElementById("livesearch").innerHTML=this.responseText;
+      //document.getElementById("livesearch").style.border="1px solid #A5ACB2";
+    }
+  }
+  xmlhttp.open("GET","PHPFile/livesearchForName.php?q="+str,true);
+  xmlhttp.send();
+}
+
+
+    </script>
+    
 
     
-    <script src="jquery-1.9.1.js"></script>
+    <script src="../PrintReq/jquery-1.9.1.js"></script>
 
-    <script src="Workprocess.js"></script>
+    <script src="../PrintReq/Workprocess.js"></script>
 
     <title>AdminLTE 2 | Dashboard</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
@@ -153,13 +161,14 @@ if (!$query) {
           <div class="row">
             <!-- left column -->
             
-            <form method="post" action="#">
+           
 	         <p class="search_input">
-		        <input type="text" placeholder="From Date" name="searchID"  value="" class="input-control" />
-	           			 
-		        <input type="submit" name="go" value="Search" >
+           <div class="box-footer">
+		        <input type="text" onkeyup="showResult(this.value)" class="input-control" />
+	         </div>  			 
+		       
 	        </p>
-            </form>
+           
             <div class="box">
                 <div class="box-header">
                   <h3 class="box-title">Print List</h3>
@@ -183,51 +192,11 @@ if (!$query) {
                     </tr>
                     </tbody>
                      
-                    <tbody>
-                      <?php
-		                    $no 	= 1;
-		                 if(mysqli_fetch_array($result) > 0){     
-		                  while ($row = mysqli_fetch_array($result))
-		                    {
-			
-			                echo 
-                      '<tr>
-				                	<td>'.$no.'</td>
-				                	<td>'.$row['BillNo'].'</td>
-					                <td>'.$row['ClientName'].'</td>
-					                <td>'.$row['ClientAddress'].'</td>
-					                <td>'.$row['ClientPhn'].'</td>
-                          <td>'.$row['PrintType'].'</td>
-                          <td>'.$row['sft'].'</td>
-                          <td>'.$row['PrintPrice'].'</td>
-                          <td>'.$row['advance'].'</td>
-                          <td>'.$row['due'].'</td>
-                          <td>'.$row['intotal'].'</td>
-                          <td>'.$row['Todaydate'].'</td>
-                          <td>'.$row['Todaytime'].'</td>
-
-				              </tr>';
-			
-			                $no++;
-		                    }
-                         }else{
-                              echo'<p>No Result found </p>';
-                         }
-        
-        ?>
+                    <tbody id="livesearch">
+                     
                     </tbody>
                     
-                    <tfoot>
-                       <tr>
-                         <td></td>
-                         <td></td>
-                         <td></td>
-                         <td></td>
-                         <td></td>
-                         <td></td>
-                         <td colspan="3" id="cart_total" style="text-align:right"></td>
-                      </tr>
-                    </tfoot>
+                   
 
                   </table>
                   
