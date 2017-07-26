@@ -12,13 +12,7 @@ if (!$conn) {
 	die ('Failed to connect to MySQL: ' . mysqli_connect_error());	
 }
 
-
-
-$q=$_GET["q"];
-
-
-
-$sql = 'SELECT * FROM newdataentry where ClientName="'. $q .'"';
+$sql = 'SELECT * FROM newdataentry where ClientName !=0';
 
 $query = mysqli_query($conn, $sql);
 
