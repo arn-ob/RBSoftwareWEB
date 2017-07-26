@@ -22,8 +22,7 @@ if (!$query) {
   <head>
     <meta charset="UTF-8">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-
+    
     <script src="jquery-1.9.1.js"></script>
 
     <script src="Workprocess.js"></script>
