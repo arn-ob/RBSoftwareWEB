@@ -112,8 +112,9 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="#"><i class="fa fa-circle-o"></i>Display All Data</a></li>
-                <li ><a href="Due.php"><i class="fa fa-circle-o"></i>Display Due</a></li>
+                <li ><a href="SearchAll.php"><i class="fa fa-circle-o"></i>Display All Data</a></li>
+                <li><a href="Due.php"><i class="fa fa-circle-o"></i>Display Due</a></li>
+                <li class="active"><a href="#"><i class="fa fa-circle-o"></i>Search By Name</a></li>
               </ul>
             </li>
 
@@ -148,14 +149,6 @@
 
 
 
-
-
-
-
-
-
-
-
         <!-- Main content -->
         <section class="content">
           <div class="row">
@@ -164,6 +157,7 @@
            
 	         <p class="search_input">
            <div class="box-footer">
+             <p>Enter Customer Name</p>
 		        <input type="text" onkeyup="showResult(this.value)" class="input-control" />
 	         </div>  			 
 		       
@@ -177,6 +171,7 @@
                   <table class="table table-bordered" id="orderedProductsTbl">
                     <tbody><tr>
                       <th style="width: 10px">#</th>
+                      <th>Bill No</th>
                       <th>Name</th>
                       <th>Address</th>
                       <th>Phone No</th>

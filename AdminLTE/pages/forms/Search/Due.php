@@ -101,7 +101,7 @@ if (!$query) {
               <ul class="treeview-menu">
                 <li><a href="SearchAll.php"><i class="fa fa-circle-o"></i>Display All Data</a></li>
                 <li class="active"><a href="Due.php"><i class="fa fa-circle-o"></i>Display Due</a></li>
-                <li ><a href="SearchAll.php"><i class="fa fa-circle-o"></i>Search By Name</a></li>
+                <li ><a href="SearchByName.php"><i class="fa fa-circle-o"></i>Search By Name</a></li>
               </ul>
             </li>
 
