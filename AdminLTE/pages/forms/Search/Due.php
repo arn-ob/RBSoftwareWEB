@@ -1,19 +1,13 @@
 <?php
 include 'DBInfo.php';
 
-$condfitions = $_POST["searchID"];
-
-$sql = 'SELECT * FROM newdataentry where ClientName='.$condfitions.'' ;
+$sql = 'SELECT * FROM newdataentry where due != 0';
 		
 $query = mysqli_query($conn, $sql);
 
 if (!$query) {
 	die ('SQL Error: ' . mysqli_error($conn));
 }
-
-	
-
-
 ?>
 
 
@@ -22,7 +16,7 @@ if (!$query) {
   <head>
     <meta charset="UTF-8">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+
 
     <script src="jquery-1.9.1.js"></script>
 
@@ -105,8 +99,9 @@ if (!$query) {
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="#"><i class="fa fa-circle-o"></i>Display All Data</a></li>
-                <li ><a href="Due.php"><i class="fa fa-circle-o"></i>Display Due</a></li>
+                <li><a href="SearchAll.php"><i class="fa fa-circle-o"></i>Display All Data</a></li>
+                <li class="active"><a href="Due.php"><i class="fa fa-circle-o"></i>Display Due</a></li>
+                <li ><a href="SearchAll.php"><i class="fa fa-circle-o"></i>Search By Name</a></li>
               </ul>
             </li>
 
@@ -154,13 +149,7 @@ if (!$query) {
           <div class="row">
             <!-- left column -->
             
-            <form method="post" action="#">
-	         <p class="search_input">
-		        <input type="text" placeholder="From Date" name="searchID"  value="" class="input-control" />
-	           			 
-		        <input type="submit" name="go" value="Search" >
-	        </p>
-            </form>
+
             <div class="box">
                 <div class="box-header">
                   <h3 class="box-title">Print List</h3>
@@ -187,9 +176,9 @@ if (!$query) {
                     <tbody>
                       <?php
 		                    $no 	= 1;
-		                 if(mysqli_fetch_array($result) > 0){     
-		                  while ($row = mysqli_fetch_array($result))
-		                    {
+		                      
+		                  while ($row = mysqli_fetch_array($query))
+		                  {
 			
 			                echo 
                       '<tr>
@@ -210,12 +199,7 @@ if (!$query) {
 				              </tr>';
 			
 			                $no++;
-		                    }
-                         }else{
-                              echo'<p>No Result found </p>';
-                         }
-        
-        ?>
+		}?>
                     </tbody>
                     
                     <tfoot>

@@ -1,19 +1,13 @@
 <?php
 include 'DBInfo.php';
 
-$condfitions = $_POST["searchID"];
-
-$sql = 'SELECT * FROM newdataentry where ClientName='.$condfitions.'' ;
+$sql = 'SELECT * FROM newdataentry';
 		
 $query = mysqli_query($conn, $sql);
 
 if (!$query) {
 	die ('SQL Error: ' . mysqli_error($conn));
 }
-
-	
-
-
 ?>
 
 
@@ -22,7 +16,7 @@ if (!$query) {
   <head>
     <meta charset="UTF-8">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+
 
     <script src="jquery-1.9.1.js"></script>
 
@@ -154,13 +148,7 @@ if (!$query) {
           <div class="row">
             <!-- left column -->
             
-            <form method="post" action="#">
-	         <p class="search_input">
-		        <input type="text" placeholder="From Date" name="searchID"  value="" class="input-control" />
-	           			 
-		        <input type="submit" name="go" value="Search" >
-	        </p>
-            </form>
+
             <div class="box">
                 <div class="box-header">
                   <h3 class="box-title">Print List</h3>
@@ -187,9 +175,9 @@ if (!$query) {
                     <tbody>
                       <?php
 		                    $no 	= 1;
-		                 if(mysqli_fetch_array($result) > 0){     
-		                  while ($row = mysqli_fetch_array($result))
-		                    {
+		                      
+		                  while ($row = mysqli_fetch_array($query))
+		                  {
 			
 			                echo 
                       '<tr>
@@ -210,12 +198,7 @@ if (!$query) {
 				              </tr>';
 			
 			                $no++;
-		                    }
-                         }else{
-                              echo'<p>No Result found </p>';
-                         }
-        
-        ?>
+		}?>
                     </tbody>
                     
                     <tfoot>
