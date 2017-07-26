@@ -12,43 +12,40 @@ if (!$conn) {
 	die ('Failed to connect to MySQL: ' . mysqli_connect_error());	
 }
 
-$sql = 'SELECT * FROM newdataentry';
+$q=$_GET["q"];
+$sql = 'SELECT * FROM newdataentry where BillNo="'. $q .'"';
 
 $query = mysqli_query($conn, $sql);
 
 
-if($query){
- $no 	= 1;
-$row = mysqli_fetch_array($query);
-echo   '<p>'.$row['BillNo'].'</p>';	                      
-		                 
-			               
-				            echo   '<p>'.$no.'</p>';
-				            echo   ''.$row['BillNo'].'';
-					        echo  ''.$row['ClientName'].'';
-					        echo  ''.$row['ClientAddress'].'';
-					        echo  ''.$row['ClientPhn'].'';
-						  
-			while($row = mysqli_fetch_array($query)){
-
-                           	echo  ''.$row['PrintType'].'';
-                          	echo     ''.$row['sft'].'';
-                            echo     ''.$row['PrintPrice'].'';
-                            echo     ''.$row['advance'].'';
-                            echo      ''.$row['due'].'';
-			}
-                            echo     ''.$row['intotal'].'';
-                            echo     ''.$row['Todaydate'].'';
-                            echo     ''.$row['Todaytime'].'';
-
-				           
+	
 			
-			                $no++;
-		
 
 
 
+while($row = mysqli_fetch_array($query)){
+							echo   '<tr>';
+                           	echo  '<td>'.$row['PrintType'].'</td>';
+                          	echo     '<td>'.$row['sft'].'</td>';
+                            echo     '<td>'.$row['PrintPrice'].'</td>';
+                            echo     '<td>'.$row['advance'].'</td>';
+                            echo      '<td>'.$row['due'].'</td>';
+							echo   '   </tr>';
+			}
 
-}
+ while($rows = mysqli_fetch_array($query)){		                      
+		                 	echo   '<p>'.$rows['BillNo'].'</p>';
+					        echo  '<p>'.$rows['ClientName'].'</p>';
+					        echo  '<p>'.$rows['ClientAddress'].'</p>';
+					        echo  '<p>'.$rows['ClientPhn'].'</p>';
+						  
+			
+                            echo     '<p>'.$rows['intotal'].'</p>';
+                            echo     '<p>'.$rows['Todaydate'].'</p>';
+                            echo     '<p>'.$rows['Todaytime'].'</p>';
 
+					}  
+			
+				
+	
 ?>

@@ -11,8 +11,13 @@
   </script>
 
   <script>
-    function showResultForDue() {
-
+    function editResult() {
+      var str = document.getElementById("getdata").value;
+      
+      if (str.length == 0) {
+        document.getElementById("livesearch").innerHTML = "";
+        return;
+      }
 
       if (window.XMLHttpRequest) {
         // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -24,11 +29,11 @@
       xmlhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
 
-          document.getElementById("ClientName").innerHTML = this.responseText;
+          document.getElementById("GetResult").innerHTML = this.responseText;
 
         }
       }
-      xmlhttp.open("GET", "editPHP/EditPHP.php", true);
+      xmlhttp.open("GET", "editPHP/EditPHP.php?q="+ str, true);
       xmlhttp.send();
     }
   </script>
@@ -150,8 +155,9 @@
       <!--  My Working Section   -->
 
 
-
-      <input type="button" onclick="showResultForDue()">
+ <input type="text" id="getdata">
+       <input type="button" value="Display All The record" onclick="editResult()" class="btn btn-primary"></input>
+         
       <!-- Main content -->
       <style type="text/css">
         .tg {
@@ -198,16 +204,14 @@
           <th class="tg-yw4l">Address</th>
           <th class="tg-yw4l">Phone NO</th>
           <th class="tg-yw4l">PrintType</th>
-          <th class="tg-yw4l"></th>
-          <th class="tg-yw4l"></th>
-          <th class="tg-yw4l"></th>
-          <th class="tg-yw4l"></th>
-          <th class="tg-yw4l"></th>
-          <th class="tg-yw4l"></th>
-          <th class="tg-yw4l"></th>
-          <th class="tg-yw4l"></th>
-          <th class="tg-yw4l"></th>
-          <th class="tg-yw4l"></th>
+          
+          
+          <tbody id="GetResult">
+
+           </tbody>    
+
+
+
         </tr>
       </table>
       <!-- /.content -->
