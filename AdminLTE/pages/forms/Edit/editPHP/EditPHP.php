@@ -17,13 +17,27 @@ $sql = 'SELECT * FROM newdataentry where BillNo="'. $q .'"';
 
 $query = mysqli_query($conn, $sql);
 
-
-	
+$rows = mysqli_fetch_array($query);                     
+		                 	
+$r1 = $rows['BillNo'];
+				
+	echo  '<p>'.$rows['ClientName'].'</p>';
+					        echo  '<p>'.$rows['ClientAddress'].'</p>';
+					        echo  '<p>'.$rows['ClientPhn'].'</p>';
+						  
+			
+                            echo     '<p>'.$rows['intotal'].'</p>';
+                            echo     '<p>'.$rows['Todaydate'].'</p>';
+                            echo     '<p>'.$rows['Todaytime'].'</p>';
 			
 
 
 
 while($row = mysqli_fetch_array($query)){
+							echo   '<p>'.$r1.'</p>';
+					        
+
+
 							echo   '<tr>';
                            	echo  '<td>'.$row['PrintType'].'</td>';
                           	echo     '<td>'.$row['sft'].'</td>';
@@ -33,18 +47,7 @@ while($row = mysqli_fetch_array($query)){
 							echo   '   </tr>';
 			}
 
- while($rows = mysqli_fetch_array($query)){		                      
-		                 	echo   '<p>'.$rows['BillNo'].'</p>';
-					        echo  '<p>'.$rows['ClientName'].'</p>';
-					        echo  '<p>'.$rows['ClientAddress'].'</p>';
-					        echo  '<p>'.$rows['ClientPhn'].'</p>';
-						  
-			
-                            echo     '<p>'.$rows['intotal'].'</p>';
-                            echo     '<p>'.$rows['Todaydate'].'</p>';
-                            echo     '<p>'.$rows['Todaytime'].'</p>';
-
-					}  
+ 
 			
 				
 	
