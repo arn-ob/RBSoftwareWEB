@@ -4,8 +4,9 @@
 
 $db_host = 'localhost'; // Server Name
 $db_user = 'root'; // Username
-$db_pass = ''; // Password
-$db_name = 'rbsoft'; // Database Name     
+$db_pass = ''; // Password hy
+$db_name = 'rbsoft'; // Database Name 
+
 
 $conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 if (!$conn) {
@@ -13,7 +14,7 @@ if (!$conn) {
 }
 
 $q=$_GET["q"];
-$sql = 'SELECT * FROM newdataentry where BillNo="'. $q .'"';
+$sql = 'SELECT * FROM newdataentry where BillNo="'.$q.'"';
 
 $query = mysqli_query($conn, $sql);
 
