@@ -1,4 +1,7 @@
  <?php
+/* server timezone */
+date_default_timezone_set("Asia/Dhaka");
+
 $servername = "localhost";
 $username = "root";
 $password = "";

@@ -145,9 +145,10 @@ function AddtoCart()
 
                     }             
                 });
-                   for(var timer = 0;timer<200;timer++){
+
+                for(var timer = 0;timer<500;timer++){
                         console.log(timer);
-                    }    
+                }    
             }
             
             

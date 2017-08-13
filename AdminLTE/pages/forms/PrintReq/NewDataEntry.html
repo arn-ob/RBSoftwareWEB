@@ -126,7 +126,7 @@
               <!-- general form elements -->
               <div class="box box-primary">
                 <div class="box-header">
-                  <h3 class="box-title">New Data Entry</h3>
+                  <h3 class="box-title">Client Details</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
                 <form role="form">
@@ -141,10 +141,49 @@
                     </div>
 
                     <div class="form-group">
-                      <label for="exampleInputPassword1">Phone No</label>
-                      <input type="number" class="form-control" id="ClientPhn" placeholder="Phone Number">
+                      <label for="exampleInputPassword1">Phone No 1</label>
+                      <input type="number" class="form-control" id="ClientPhn1" placeholder="Phone Number">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Phone No 2</label>
+                      <input type="number" class="form-control" id="ClientPhn2" placeholder="Phone Number">
                     </div>
                     
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Party Name</label>
+                      <input type="number" class="form-control" id="PartyName" placeholder="Party Name">
+                    </div>
+                   
+
+
+                  </div><!-- /.box-body -->
+
+                  <div class="box-footer">
+                    <input name="SendValue" type="button" value="Add to list" onclick="AddtoCart()" class="btn btn-primary"></input>
+                    
+                    <input name="ClearField" type="button" value="Clear Field" onclick="ClearHtmlElement()" class="btn btn-default"></input>
+                    
+                    <input name="submit" type="submit" value="Submit" onclick="record()" class="btn btn-default" ></input>
+        
+                  
+                  </div>
+                </form>
+              </div><!-- /.box -->
+
+             
+
+            </div><!--/.col (left) -->
+            <!-- right column -->
+            <div class="col-md-6">
+              <!-- general form elements disabled -->
+              <div class="box box-warning">
+                <div class="box-header">
+                  <h3 class="box-title">Print Details</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <form role="form">
+                    <!-- text input -->
                     <div class="form-group">
                       <label>Select Print Type</label>
                       <select class="form-control" id="PrintType">
@@ -171,6 +210,9 @@
                       <input type="number" class="form-control" id="PrintQuantity" placeholder="Number Of Print Copy">
                     </div>
 
+
+                    <!--
+                      // Account Section 
                     <div class="form-group">
                       <label for="exampleInputPassword1">Price</label>
                       <input type="number" class="form-control" id="PrintPrice" placeholder="Price per ft">
@@ -194,26 +236,12 @@
                       <input type="number" class="form-control" id="framePrice" placeholder="Advance">
                     </div>  
 
+                   -->
 
-                  </div><!-- /.box-body -->
-
-                  <div class="box-footer">
-                    <input name="SendValue" type="button" value="Add to list" onclick="AddtoCart()" class="btn btn-primary"></input>
-                    
-                    <input name="ClearField" type="button" value="Clear Field" onclick="ClearHtmlElement()" class="btn btn-default"></input>
-                    
-                    <input name="submit" type="submit" value="Submit" onclick="record()" class="btn btn-default" ></input>
-        
-                  
-                  </div>
-                </form>
+                  </form>
+                </div><!-- /.box-body -->
               </div><!-- /.box -->
-
-             
-
-            </div><!--/.col (left) -->
-            <!-- right column -->
-         
+            </div>
                
                
 

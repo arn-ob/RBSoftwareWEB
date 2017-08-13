@@ -2,7 +2,8 @@
 
 // This in the project
 
-$db_host = 'localhost'; // Server Name
+$db_host = 'localhost'; // Server Name local
+//$db_host = '43.245.141.6:90';
 $db_user = 'root'; // Username
 $db_pass = ''; // Password hy
 $db_name = 'rbsoft'; // Database Name 
