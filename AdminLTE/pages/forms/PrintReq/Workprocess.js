@@ -25,32 +25,30 @@ function displayShoppingCart()
             var cellNumber = row.insertCell(0);
             var cellName = row.insertCell(1);
             var cellAddress = row.insertCell(2);
-            var cellPhoneNo = row.insertCell(3);
-            var cellPrintType = row.insertCell(4);
-            var cellsft = row.insertCell(5);
-            var cellPrice = row.insertCell(6);
+            var cellPhoneNo1 = row.insertCell(3);
+            var cellPhoneNo2 = row.insertCell(4);
+            var cellPrintType = row.insertCell(5);
+            var cellsft = row.insertCell(6);
             var cellqunt = row.insertCell(7);
-            var cellCalPrice = row.insertCell(8);
-            cellCalPrice.align="right";
+            
+            
             
             //fill cells with values from current product object of our array
 
             cellNumber.innerHTML 	=shoppingCart[product].Number +count.toString();
             cellName.innerHTML 		= shoppingCart[product].Name;
             cellAddress.innerHTML = shoppingCart[product].Addresss;
-            cellPhoneNo.innerHTML = shoppingCart[product].PhoneNo;
+            cellPhoneNo1.innerHTML = shoppingCart[product].PhoneNo1;
+            cellPhoneNo2.innerHTML = shoppingCart[product].PhoneNo2;
             cellPrintType.innerHTML = shoppingCart[product].PrintType;
             cellsft.innerHTML = shoppingCart[product].sft;
-            cellPrice.innerHTML = shoppingCart[product].Price;
             cellqunt.innerHTML = shoppingCart[product].Quantity;
-            cellCalPrice.innerHTML = shoppingCart[product].Price * shoppingCart[product].sft ;
             
-            cart_total_price+=shoppingCart[product].Price * shoppingCart[product].sft;
             count++;
 
         }
         
-        document.getElementById("cart_total").innerHTML=cart_total_price;
+       
     }
 
 
@@ -62,16 +60,16 @@ function AddtoCart()
        singleProduct.Number = "";
        singleProduct.Name=document.getElementById("ClientName").value;
        singleProduct.Addresss=document.getElementById("ClientAddress").value;
-       singleProduct.PhoneNo=document.getElementById("ClientPhn").value;
+       singleProduct.PhoneNo1=document.getElementById("ClientPhn1").value;
+       singleProduct.PhoneNo2=document.getElementById("ClientPhn2").value;
        singleProduct.PrintType=document.getElementById("PrintType").value;
        singleProduct.Height=document.getElementById("PrintHeight").value;
        singleProduct.Wide=document.getElementById("PrintWide").value;
        singleProduct.Quantity=document.getElementById("PrintQuantity").value;
-       singleProduct.Price=document.getElementById("PrintPrice").value;
-       singleProduct.AdvancePay=document.getElementById("PrintAdvancePay").value;
+       
+       
        singleProduct.sft = document.getElementById("PrintHeight").value * document.getElementById("PrintWide").value;
        singleProduct.AddedFrame=document.getElementById("Addedframe").value;
-       singleProduct.FramePrice=document.getElementById("framePrice").value;
        
        shoppingCart.push(singleProduct);
        
@@ -101,36 +99,34 @@ function AddtoCart()
                
                 var RECname = shoppingCart[product].Name.toString();
                 var RECaddress = shoppingCart[product].Addresss.toString();
-                var RECphn = shoppingCart[product].PhoneNo.toString();
+                var RECphn1 = shoppingCart[product].PhoneNo1.toString();
+                var RECphn2 = shoppingCart[product].PhoneNo2.toString();
                 var RECprintType = shoppingCart[product].PrintType.toString();
                 var RECheight = shoppingCart[product].Height.toString();
                 var RECwide = shoppingCart[product].Wide.toString();
                 var RECsft = shoppingCart[product].sft.toString();
-                var RECprice = shoppingCart[product].Price.toString();
                 var RECQunt = shoppingCart[product].Quantity.toString();
-                var RECAdvance = shoppingCart[product].AdvancePay.toString();
                 var RECFrame = shoppingCart[product].AddedFrame.toString();
-                var RECFramePrice = shoppingCart[product].FramePrice.toString();
-                var RECPrintTotalprice = cart_total_price.toString();
+               
+                
                
                 var dataString = 'BillNo='+ billNo
                         + '&ClientName=' + RECname        
                         + '&ClientAddress=' + RECaddress
-                        + '&ClientPhn=' + RECphn
+                        + '&ClientPhn1=' + RECphn1
+                        + '&ClientPhn2=' + RECphn2
                         + '&PrintType=' + RECprintType
                         + '&PrintHeight=' + RECheight
                         + '&PrintWide=' + RECwide
                         + '&PrintQuantity=' + RECQunt
-                        + '&PrintPrice=' + RECprice
                         + '&sft=' + RECsft
-                        + '&advancePay=' + RECAdvance
                         + '&frame=' + RECFrame
-                        + '&framePrice=' + RECFramePrice
-                        + '&InTotalCartPricce=' + RECPrintTotalprice
+                        
+                       
 
 
 
-                //var text ='{"BillNo":"'+billNo+'","ClientName":"'+RECname+'","ClientAddress":"'+RECaddress+'","ClientPhn":"'+RECphn+'","PrintType":"'+RECprintType+'","PrintHeight":"'+RECheight+'","PrintWide":"'+RECwide+'","PrintQuantity":"'+RECQunt+'","PrintPrice":"'+RECprice+'","sft":"'+RECsft+'","advancePay":"'+RECAdvance+'","frame":"'+RECFrame+'","framePrice":"'+RECFramePrice+'","InTotalCartPricce":"'+RECPrintTotalprice+'"}';
+                //var text ='{"BillNo":"'+billNo+'","ClientName":"'+RECname+'","ClientAddress":"'+RECaddress+'","ClientPhn":"'+RECphn+'","PrintType":"'+RECprintType+'","PrintHeight":"'+RECheight+'","PrintWide":"'+RECwide+'","PrintQuantity":"'+RECQunt+'","sft":"'+RECsft+'","frame":"'+RECFrame+'"}';
                 //var obj = JSON.parse(text);
                 $.ajax({
                     type: 'post',

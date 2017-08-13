@@ -3,13 +3,40 @@
   <head>
     <meta charset="UTF-8">
 
+  <script>
+    function showResultByName(str) {
+
+      if (str.length == 0) {
+        document.getElementById("getuserAccount").innerHTML = "";
+        return;
+      }
+      if (window.XMLHttpRequest) {
+        // code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+      } else {  // code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+      }
+
+      xmlhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          //document.getElementById("getuserAccount").innerHTML = this.responseText;
+          //document.getElementById("ClientName").value = xmlhttp.responseText;
+          var response = this.responseText;
+        }
+      }
+      xmlhttp.open("GET", "getResult.php?q=" + str, true);
+      xmlhttp.send();
+    }
+
+  </script>
+
 
 
     <script src="jquery-1.9.1.js"></script>
 
     <script src="Workprocess.js"></script>
 
-    <title>AdminLTE 2 | Dashboard</title>
+    <title>RB Software</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.2 -->
     <link href="../../../bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -34,7 +61,7 @@
     <div class="wrapper">
       
       <header class="main-header">
-        <a href="../../../index2.html" class="logo"><b>Admin</b>LTE</a>
+        <a href="../../../index2.html" class="logo"><b>RB_</b>Software</a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button-->
@@ -88,6 +115,13 @@
 
       <!-- Right side column. Contains the navbar and content of the page -->
       <div class="content-wrapper">
+         <p class="search_input">
+            <div class="box-footer">
+              <p>Enter Customer Name</p>
+              <input type="text" onkeyup="showResultByName(this.value)" class="input-control" />
+            </div>
+
+          </p>
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
@@ -107,8 +141,36 @@
 
         <!--  My Working Section   -->
 
+<?php
+
+// This in the project
+
+$db_host = 'localhost'; // Server Name
+$db_user = 'root'; // Username
+$db_pass = ''; // Password
+$db_name = 'rbsoft'; // Database Name     
+
+$conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
+if (!$conn) {
+	die ('Failed to connect to MySQL: ' . mysqli_connect_error());	
+}
+
+$q = false;
+if (isset($_GET['q']))
+{
+   $q = $_GET['q'];
+}
 
 
+
+
+$sql = 'SELECT * FROM newdataentry where ClientName="'. $q .'"';
+
+$query = mysqli_query($conn, $sql);
+
+ $no 	= 1;
+		       
+?>
 
 
 
@@ -131,42 +193,26 @@
                 <!-- form start -->
                 <form role="form">
                   <div class="box-body">
+
+<?php
+//Start loop
+    while ($row = mysqli_fetch_array($query))
+		                  {
+
+?>
+
                     <div class="form-group">
                       <label for="exampleInputEmail1">Name</label>
-                      <input type="text" class="form-control" id="ClientName" placeholder="Client Name">
+                      <input type="text" class="form-control" id="ClientName" value="<?php echo $response ?>">
                     </div>
-                    <div class="form-group">
-                      <label for="exampleInputPassword1">Address</label>
-                      <input type="text" class="form-control" id="ClientAddress" placeholder="Address">
-                    </div>
+<?php
+           $no++;
+		}
+// End Loop
 
-                    <div class="form-group">
-                      <label for="exampleInputPassword1">Phone No 1</label>
-                      <input type="number" class="form-control" id="ClientPhn1" placeholder="Phone Number">
-                    </div>
-
-                    <div class="form-group">
-                      <label for="exampleInputPassword1">Phone No 2</label>
-                      <input type="number" class="form-control" id="ClientPhn2" placeholder="Phone Number">
-                    </div>
-                    
-                    <div class="form-group">
-                      <label for="exampleInputPassword1">Party Name</label>
-                      <input type="number" class="form-control" id="PartyName" placeholder="Party Name">
-                    </div>
-                   
-
-
-                  </div><!-- /.box-body -->
-
-                  <div class="box-footer">
-                    <input name="SendValue" type="button" value="Add to list" onclick="AddtoCart()" class="btn btn-primary"></input>
-                    
-                    <input name="ClearField" type="button" value="Clear Field" onclick="ClearHtmlElement()" class="btn btn-default"></input>
-                    
-                    <input name="submit" type="submit" value="Submit" onclick="record()" class="btn btn-default" ></input>
-        
+?>                  
                   
+                  <div id="getuserAccount"></div>
                   </div>
                 </form>
               </div><!-- /.box -->
@@ -209,6 +255,15 @@
                       <label for="exampleInputPassword1">Quantity</label>
                       <input type="number" class="form-control" id="PrintQuantity" placeholder="Number Of Print Copy">
                     </div>
+                    
+
+                    <div class="form-group">
+                      <label>Frame Added</label>
+                      <select class="form-control" id="Addedframe">
+                        <option>Yes</option>
+                        <option selected>No</option>
+                      </select>
+                    </div>
 
 
                     <!--
@@ -222,14 +277,6 @@
                       <label for="exampleInputPassword1">Advance Pay</label>
                       <input type="number" class="form-control" id="PrintAdvancePay" placeholder="Advance">
                     </div>  
-
-                     <div class="form-group">
-                      <label>Select Print Type</label>
-                      <select class="form-control" id="Addedframe">
-                        <option>Yes</option>
-                        <option selected>No</option>
-                      </select>
-                    </div>
 
                     <div class="form-group">
                       <label for="exampleInputPassword1">Frame Price</label>
@@ -269,9 +316,8 @@
                       <th>Phone No</th>
                       <th>Print Type</th>
                       <th>SFT</th>
-                      <th>Price</th>
                       <th>Quantity</th>
-                      <th>In Total</th>
+                      
                      
                     </tr>
                     </tbody>
@@ -287,7 +333,6 @@
                          <td></td>
                          <td></td>
                          <td></td>
-                         <td colspan="3" id="cart_total" style="text-align:right"></td>
                       </tr>
                     </tfoot>
 
@@ -305,9 +350,9 @@
       </div><!-- /.content-wrapper -->
       <footer class="main-footer">
         <div class="pull-right hidden-xs">
-          <b>Version</b> 2.0
+          <b>Version</b> 1.0 [Beta]
         </div>
-        <strong>Copyright &copy; 2014-2015 <a href="#">Almsaeed Studio</a>.</strong> All rights reserved.
+        <p>Developed by RB_ IT </p> 
       </footer>
     </div><!-- ./wrapper -->
 
