@@ -2,7 +2,43 @@
 <html>
   <head>
     <meta charset="UTF-8">
+    <script>
+    // Declear var
+    var TempSft = 0;
+    var TempAdvance = 0;
+    
+    GetDue = function()
+    {
 
+      var resources = document.getElementById('advance').value;
+      document.getElementById('due').value = 500 - parseInt(resources);
+    }
+
+    function getsft(sft)   
+    {
+        TempSft = sft;
+    }
+
+    function getAdvance(advance){
+        TempAdvance = advance.value;
+    }
+    ///////////////////////
+    function Calc(className){
+      var elements = document.getElementById(className);
+      var sft = document.getElementById(className);
+      var due = 0;
+      
+      
+      due = 500 - parseInt(elements.value);
+      
+      
+      document.form0.due.value = due * parseInt(sft.value);
+   }
+
+
+
+
+    </script>
   
     <script src="jquery-1.9.1.js"></script>
 
@@ -160,8 +196,9 @@ $result2 = mysqli_query ($mysqli, $query2) or die ('error getting data from data
     $PhoneNo2 = $row['ClientPhn2'];
     //$party = $row['PartyName'];
     //$CreatedDate = $row['CreatedDate'];
+     //$sft = 56;
   }
-       
+  $sft = 56;    
 ?>
 
 <!-- End php section -->
@@ -177,7 +214,7 @@ $result2 = mysqli_query ($mysqli, $query2) or die ('error getting data from data
                   <h3 class="box-title">Client Details</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form role="form">
+                <form role="form" >
                   <div class="box-body">
 
                     <div class="form-group">
@@ -220,42 +257,41 @@ $result2 = mysqli_query ($mysqli, $query2) or die ('error getting data from data
                   <h3 class="box-title">Print Details</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <form role="form">
+                  <form role="form" name="form0" id="form0">
                     <!-- text input -->
+                   
                     <div class="form-group">
-                      <label>Select Print Type</label>
-                      <select class="form-control" id="PrintType">
-                        <option>PVC</option>
-                        <option>Pana</option>
-                        <option>Stiker</option>
-                         <option>Other</option>
-                      </select>
+                      <label for="exampleInputPassword1">Total Sft</label>
+                      <input type="number" class="form-control" id="sft" placeholder="sft" onKeyUp="Calc('sft')" value="<?php print isset($sft) ? $sft : '';?>" disabled >
                     </div>
-                    
+
+
                      <div class="form-group">
-                      <label for="exampleInputPassword1">Height</label>
-                      <input type="number" class="form-control" id="PrintHeight" placeholder="Height">
+                      <label>Sft Price</label>
+                      <input type="number" class="form-control" id="sftPrice" placeholder="Sft Price" onkeyup="getSft(this.value)">
                     </div>
 
 
                     <div class="form-group">
-                      <label for="exampleInputPassword1">Wide</label>
-                      <input type="number" class="form-control" id="PrintWide" placeholder="Wide">
+                      <label>Amount</label>
+                      <input type="number" class="form-control" id="amount" placeholder="Amount" onchange="GetTotalAmount()">
+                    </div>
+
+                    <div class="form-group">
+                      <label>Advance</label>
+                      <input type="number" class="form-control" id="advance" placeholder="Advance" onKeyUp="Calc('advance')" onClick="this.focus();this.select();">
                     </div>
                     
                     <div class="form-group">
-                      <label for="exampleInputPassword1">Quantity</label>
-                      <input type="number" class="form-control" id="PrintQuantity" placeholder="Number Of Print Copy">
+                      <label>Due</label>
+                      <input type="number" class="form-control" id="due" placeholder="Due" name="due" disabled>
                     </div>
                     
-
                     <div class="form-group">
-                      <label>Frame Added</label>
-                      <select class="form-control" id="Addedframe">
-                        <option>Yes</option>
-                        <option selected>No</option>
-                      </select>
+                      <label>Intotal Needed</label>
+                      <input type="number" class="form-control" id="IntotalNeeded" placeholder="InTotal Needed" onchange="GetDue()">
                     </div>
+                    
 
 
                     <!--
