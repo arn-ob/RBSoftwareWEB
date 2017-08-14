@@ -72,12 +72,12 @@
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="active treeview">
+            <li class="treeview">
               <a href="#">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
+                <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i>Dashboard</a></li>
                <!-- <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li> -->
               </ul>
             </li>
@@ -96,7 +96,7 @@
              
             </li>
            
-            <li class="treeview active">
+            <li class="treeview">
               <a href="#">
                 <i class="fa fa-edit"></i> <span>Search Data</span>
                 <i class="fa fa-angle-left pull-right"></i>
@@ -107,7 +107,7 @@
               </ul>
             </li>
 
-            <li class="treeview active">
+            <li class="treeview">
               <a href="#">
                 <i class="fa fa-edit"></i> <span>Account</span>
                 <i class="fa fa-angle-left pull-right"></i>
@@ -118,7 +118,7 @@
             </li>
 
 
-            <li class="treeview active">
+            <li class="treeview">
               <a href="#">
                 <i class="fa fa-edit"></i> <span>Edit Data</span>
                 <i class="fa fa-angle-left pull-right"></i>
@@ -163,7 +163,7 @@
               <div class="small-box bg-aqua">
                 <div class="inner">
                   <h3>Data Entry</h3>
-                  <p>New Print Order</p>
+                  
                 </div>
                 <div class="icon">
                   <i class="ion ion-bag"></i>
@@ -175,8 +175,8 @@
               <!-- small box -->
               <div class="small-box bg-green">
                 <div class="inner">
-                  <h3>53<sup style="font-size: 20px">%</sup></h3>
-                  <p>Search All Data</p>
+                  <h3>Search Data</h3>
+                  
                 </div>
                 <div class="icon">
                   <i class="ion ion-stats-bars"></i>
@@ -188,8 +188,8 @@
               <!-- small box -->
               <div class="small-box bg-yellow">
                 <div class="inner">
-                  <h3>44</h3>
-                  <p>Account</p>
+                  <h3>Account</h3>
+                  
                 </div>
                 <div class="icon">
                   <i class="ion ion-bag"></i>
@@ -202,7 +202,7 @@
               <div class="small-box bg-red">
                 <div class="inner">
                   <h3>65</h3>
-                  <p>Unique Visitors</p>
+                  
                 </div>
                 <div class="icon">
                   <i class="ion ion-pie-graph"></i>
