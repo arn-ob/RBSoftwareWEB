@@ -3,35 +3,7 @@
   <head>
     <meta charset="UTF-8">
 
-  <script>
-    function showResultByName(str) {
-
-      if (str.length == 0) {
-        document.getElementById("getuserAccount").innerHTML = "";
-        return;
-      }
-      if (window.XMLHttpRequest) {
-        // code for IE7+, Firefox, Chrome, Opera, Safari
-        xmlhttp = new XMLHttpRequest();
-      } else {  // code for IE6, IE5
-        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-      }
-
-      xmlhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-          //document.getElementById("getuserAccount").innerHTML = this.responseText;
-          //document.getElementById("ClientName").value = xmlhttp.responseText;
-          var response = this.responseText;
-        }
-      }
-      xmlhttp.open("GET", "getResult.php?q=" + str, true);
-      xmlhttp.send();
-    }
-
-  </script>
-
-
-
+  
     <script src="jquery-1.9.1.js"></script>
 
     <script src="Workprocess.js"></script>
@@ -103,7 +75,7 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="#"><i class="fa fa-circle-o"></i>New Data Entry</a></li>
+                <li class="active"><a href="#"><i class="fa fa-circle-o"></i>Accounts [Working]</a></li>
                  </ul>
             </li>
            
@@ -117,8 +89,11 @@
       <div class="content-wrapper">
          <p class="search_input">
             <div class="box-footer">
-              <p>Enter Customer Name</p>
-              <input type="text" onkeyup="showResultByName(this.value)" class="input-control" />
+              <form method="post" action="account.php">
+                <input type="hidden" name="submitted" value="true"/>
+                  <label> Search Criteria:<input type="text" name="criteria" /></label>
+                      <input type="submit" />
+              </form>
             </div>
 
           </p>
@@ -141,44 +116,39 @@
 
         <!--  My Working Section   -->
 
+
+
+<!-- php section -->
 <?php
 
 // This in the project
 
-$db_host = 'localhost'; // Server Name
-$db_user = 'root'; // Username
-$db_pass = ''; // Password
-$db_name = 'rbsoft'; // Database Name     
+   
 
-$conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
-if (!$conn) {
-	die ('Failed to connect to MySQL: ' . mysqli_connect_error());	
-}
+if (isset($_POST['submitted'])){
+// connect to the DB
 
-$q = false;
-if (isset($_GET['q']))
-{
-   $q = $_GET['q'];
-}
+// server info
+$server = 'localhost';
+$user = 'root';
+$pass = '';
+$db = 'rbsoft';  
 
+$mysqli = new mysqli($server, $user, $pass, $db);
 
+// show errors (remove this line if on a live site)
+mysqli_report(MYSQLI_REPORT_ERROR);
 
+$criteria = $_POST['criteria'];
+$query = "SELECT * FROM newdataentry WHERE BillNo ='".$criteria."'";
+$result = mysqli_query ($mysqli, $query) or die ('error getting data from database');
+$num_rows = mysqli_num_rows ($result);
+echo "$num_rows results found";
 
-$sql = 'SELECT * FROM newdataentry where ClientName="'. $q .'"';
-
-$query = mysqli_query($conn, $sql);
-
- $no 	= 1;
 		       
 ?>
 
-
-
-
-
-
-
-
+<!-- End php section -->
 
         <!-- Main content -->
         <section class="content">
@@ -193,25 +163,18 @@ $query = mysqli_query($conn, $sql);
                 <!-- form start -->
                 <form role="form">
                   <div class="box-body">
-
 <?php
-//Start loop
-    while ($row = mysqli_fetch_array($query))
-		                  {
-
+while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 ?>
-
                     <div class="form-group">
                       <label for="exampleInputEmail1">Name</label>
-                      <input type="text" class="form-control" id="ClientName" value="<?php echo $response ?>">
+                      <input type="text" class="form-control" id="ClientName" value="<?php echo $row['ClientName']?>">
                     </div>
-<?php
-           $no++;
-		}
-// End Loop
 
-?>                  
-                  
+<?php
+}
+}
+?>
                   <div id="getuserAccount"></div>
                   </div>
                 </form>
