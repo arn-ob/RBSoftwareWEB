@@ -91,7 +91,7 @@
             <div class="box-footer">
               <form method="post" action="account.php">
                 <input type="hidden" name="submitted" value="true"/>
-                  <label> Search Criteria:<input type="text" name="criteria" /></label>
+                  <label>Search By BillNo:<input type="text" name="getbillno" /></label>
                       <input type="submit" />
               </form>
             </div>
@@ -139,13 +139,26 @@ $mysqli = new mysqli($server, $user, $pass, $db);
 // show errors (remove this line if on a live site)
 mysqli_report(MYSQLI_REPORT_ERROR);
 
-$criteria = $_POST['criteria'];
-$query = "SELECT * FROM newdataentry WHERE BillNo ='".$criteria."'";
-$result = mysqli_query ($mysqli, $query) or die ('error getting data from database');
-$num_rows = mysqli_num_rows ($result);
-echo "$num_rows results found";
+$getbillno = $_POST['getbillno'];
+$query1 = "SELECT * FROM newdataentry WHERE BillNo ='".$getbillno."' limit 1";
+$query2 = "SELECT PrintType,PrintHeight,PrintWide,PrintQuantity,sft,frame FROM newdataentry WHERE BillNo ='".$getbillno."'";
+$result1 = mysqli_query ($mysqli, $query1) or die ('error getting data from database');
+$result2 = mysqli_query ($mysqli, $query2) or die ('error getting data from database');
+//$num_rows1 = mysqli_num_rows ($result1);
 
-		       
+//echo '<script>alert('$num_rows1')</script>';
+
+  while ($row = mysqli_fetch_array($result1, MYSQLI_ASSOC)) 
+  {
+    $name = $row['ClientName'];
+    $billNo = $row['BillNo'];
+    $Address = $row['ClientAddress'];
+    $PhoneNo1 = $row['ClientPhn1'];
+    $PhoneNo2 = $row['ClientPhn2'];
+    //$party = $row['PartyName'];
+    //$CreatedDate = $row['CreatedDate'];
+  }
+       
 ?>
 
 <!-- End php section -->
@@ -163,19 +176,32 @@ echo "$num_rows results found";
                 <!-- form start -->
                 <form role="form">
                   <div class="box-body">
-<?php
-while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-?>
+
                     <div class="form-group">
                       <label for="exampleInputEmail1">Name</label>
-                      <input type="text" class="form-control" id="ClientName" value="<?php echo $row['ClientName']?>">
+                      <input type="text" class="form-control" id="ClientName" value="<?php print isset($billNo) ? $billNo : '';?>">
                     </div>
 
-<?php
-}
-}
-?>
-                  <div id="getuserAccount"></div>
+
+                     <div class="form-group">
+                      <label for="exampleInputEmail1">Name</label>
+                      <input type="text" class="form-control" id="ClientName" placeholder="Client Name" value="<?php print isset($name) ? $name : '';?>">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Address</label>
+                      <input type="text" class="form-control" id="ClientAddress" placeholder="Address" value="<?php print isset($Address) ? $Address : '';?>">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Phone No 1</label>
+                      <input type="number" class="form-control" id="ClientPhn1" placeholder="Phone Number" value="<?php print isset($PhoneNo1) ? $PhoneNo1 : '';?>">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Phone No 2</label>
+                      <input type="number" class="form-control" id="ClientPhn2" placeholder="Phone Number" value="<?php print isset($PhoneNo2) ? $PhoneNo2 : '';?>">
+                    </div>
+                    
                   </div>
                 </form>
               </div><!-- /.box -->
@@ -274,7 +300,7 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
                   <table class="table table-bordered" id="orderedProductsTbl">
                     <tbody><tr>
                       <th style="width: 10px">#</th>
-                      <th>Name</th>
+                      <th>Type</th>
                       <th>Address</th>
                       <th>Phone No</th>
                       <th>Print Type</th>
@@ -284,10 +310,25 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
                      
                     </tr>
                     </tbody>
-                     
-                    <tbody id="orderedProductsTblBody">
-                    </tbody>
                     
+                    
+                    <tbody>
+                    <?php
+                   
+                    while ($rows = mysqli_fetch_array($result2, MYSQLI_ASSOC)) 
+                      {
+                        echo   '<tr>';
+                       	echo   '<td>'.$rows['PrintType'].'</td>';
+                        echo   '<td>'.$rows['PrintHeight'].'</td>';
+                        echo   '<td>'.$rows['PrintWide'].'</td>';
+                        echo   '<td>'.$rows['PrintQuantity'].'</td>';
+                        echo   '<td>'.$rows['sft'].'</td>';
+                        echo   '<td>'.$rows['frame'].'</td>';
+                        echo   '</tr>';
+                      }
+                  }
+                    ?>
+                    </tbody>
                     <tfoot>
                        <tr>
                          <td></td>
