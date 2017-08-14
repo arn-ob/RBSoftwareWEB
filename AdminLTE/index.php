@@ -87,7 +87,7 @@
            <!-- i need this -->
             <li class="treeview">
               <a href="#">
-                <i class="fa fa-edit"></i> <span>Forms</span>
+                <i class="fa fa-edit"></i> <span>Data Entry</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
@@ -103,12 +103,32 @@
               </a>
              <ul class="treeview-menu">
                 <li><a href="pages/forms/Search/SearchAll.php"><i class="fa fa-circle-o"></i>Display All Data</a></li>
-                <li><a href="pages/forms/Search/Due.php"><i class="fa fa-circle-o"></i>Display Due</a></li>
                 <li><a href="pages/forms/Search/SearchByName.php"><i class="fa fa-circle-o"></i>Search By Name</a></li>
               </ul>
             </li>
 
-             
+            <li class="treeview active">
+              <a href="#">
+                <i class="fa fa-edit"></i> <span>Account</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+             <ul class="treeview-menu">
+                <li><a href="pages/forms/account/account.php"><i class="fa fa-circle-o"></i>Accounts</a></li>
+                 </ul>
+            </li>
+
+
+            <li class="treeview active">
+              <a href="#">
+                <i class="fa fa-edit"></i> <span>Edit Data</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+             <ul class="treeview-menu">
+                <li><a href="pages/forms/Edit/EditData.php"><i class="fa fa-circle-o"></i>Edit Data</a></li>
+                 </ul>
+            </li>
+
+
 
 
 
@@ -199,11 +219,11 @@
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
       <footer class="main-footer">
-        <div class="pull-right hidden-xs">
-          <b>Version</b> 2.0
-        </div>
-        <strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">RB Software</a>.</strong> All rights reserved.
-      </footer>
+          <div class="pull-right hidden-xs">
+            <b>Version</b> 1.0 [Beta]
+          </div>
+          <p>Developed by RB_ IT </p> 
+        </footer>
     </div><!-- ./wrapper -->
 
     <!-- jQuery 2.1.3 -->

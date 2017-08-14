@@ -3,25 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <script>
-    // Declear var
-    var TempSft = 0;
-    var TempAdvance = 0;
-    
-    GetDue = function()
-    {
-
-      var resources = document.getElementById('advance').value;
-      document.getElementById('due').value = 500 - parseInt(resources);
-    }
-
-    function getsft(sft)   
-    {
-        TempSft = sft;
-    }
-
-    function getAdvance(advance){
-        TempAdvance = advance.value;
-    }
+   
     ///////////////////////
     function Calc(className){
       var elements = document.getElementById(className);
@@ -92,28 +74,49 @@
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="treeview">
-              <a href="#">
-                <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="../../../index.html"><i class="fa fa-circle-o"></i> Dashboard</a></li>
-               
-              </ul>
-            </li>
+             <!-- i need this -->
+             <li class="treeview">
+             <a href="#">
+               <i class="fa fa-edit"></i> <span>Data Entry</span>
+               <i class="fa fa-angle-left pull-right"></i>
+             </a>
+             <ul class="treeview-menu">
+               <li><a href="../PrintReq/NewDataEntry.php"><i class="fa fa-circle-o"></i>New Data Entry</a></li>
+             </ul>
             
-         
+           </li>
           
-            
-            <li class="treeview active">
-              <a href="#">
-                <i class="fa fa-edit"></i> <span>Forms</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li class="active"><a href="#"><i class="fa fa-circle-o"></i>Accounts [Working]</a></li>
-                 </ul>
-            </li>
+           <li class="treeview">
+             <a href="#">
+               <i class="fa fa-edit"></i> <span>Search Data</span>
+               <i class="fa fa-angle-left pull-right"></i>
+             </a>
+            <ul class="treeview-menu">
+               <li><a href="../Search/SearchAll.php"><i class="fa fa-circle-o"></i>Display All Data</a></li>
+               <li><a href="../Search/SearchByName.php"><i class="fa fa-circle-o"></i>Search By Name</a></li>
+             </ul>
+           </li>
+
+           <li class="treeview active">
+             <a href="#">
+               <i class="fa fa-edit"></i> <span>Account</span>
+               <i class="fa fa-angle-left pull-right"></i>
+             </a>
+            <ul class="treeview-menu">
+               <li><a href="../account/account.php"><i class="fa fa-circle-o"></i>Accounts</a></li>
+                </ul>
+           </li>
+
+
+           <li class="treeview">
+             <a href="#">
+               <i class="fa fa-edit"></i> <span>Edit Data</span>
+               <i class="fa fa-angle-left pull-right"></i>
+             </a>
+            <ul class="treeview-menu">
+               <li><a href="../Edit/EditData.php"><i class="fa fa-circle-o"></i>Edit Data</a></li>
+                </ul>
+           </li>
            
            
           </ul>
@@ -268,13 +271,13 @@ $result2 = mysqli_query ($mysqli, $query2) or die ('error getting data from data
 
                      <div class="form-group">
                       <label>Sft Price</label>
-                      <input type="number" class="form-control" id="sftPrice" placeholder="Sft Price" onkeyup="getSft(this.value)">
+                      <input type="number" class="form-control" id="sftPrice" placeholder="Sft Price">
                     </div>
 
 
                     <div class="form-group">
                       <label>Amount</label>
-                      <input type="number" class="form-control" id="amount" placeholder="Amount" onchange="GetTotalAmount()">
+                      <input type="number" class="form-control" id="amount" placeholder="Amount">
                     </div>
 
                     <div class="form-group">
@@ -289,30 +292,9 @@ $result2 = mysqli_query ($mysqli, $query2) or die ('error getting data from data
                     
                     <div class="form-group">
                       <label>Intotal Needed</label>
-                      <input type="number" class="form-control" id="IntotalNeeded" placeholder="InTotal Needed" onchange="GetDue()">
+                      <input type="number" class="form-control" id="IntotalNeeded" placeholder="InTotal Needed">
                     </div>
-                    
-
-
-                    <!--
-                      // Account Section 
-                    <div class="form-group">
-                      <label for="exampleInputPassword1">Price</label>
-                      <input type="number" class="form-control" id="PrintPrice" placeholder="Price per ft">
-                    </div>
-
-                    <div class="form-group">
-                      <label for="exampleInputPassword1">Advance Pay</label>
-                      <input type="number" class="form-control" id="PrintAdvancePay" placeholder="Advance">
-                    </div>  
-
-                    <div class="form-group">
-                      <label for="exampleInputPassword1">Frame Price</label>
-                      <input type="number" class="form-control" id="framePrice" placeholder="Advance">
-                    </div>  
-
-                   -->
-
+                
                   </form>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->

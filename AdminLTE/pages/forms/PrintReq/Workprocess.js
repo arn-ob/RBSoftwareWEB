@@ -1,6 +1,6 @@
   //create array that will hold all ordered products
     var shoppingCart = [];
-    var cart_total_price=0;
+    var cart_total_sft=0;
     var orderedProductsTblBody;
     
     //this function manipulates DOM and displays content of our shopping cart
@@ -45,7 +45,7 @@ function displayShoppingCart()
             cellqunt.innerHTML = shoppingCart[product].Quantity;
             
             count++;
-
+            cart_total_sft += cellsft;
         }
         
        
