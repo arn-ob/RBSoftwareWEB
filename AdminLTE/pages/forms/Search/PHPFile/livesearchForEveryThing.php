@@ -17,7 +17,8 @@ $sql = 'SELECT * FROM newdataentry';
 $query = mysqli_query($conn, $sql);
 
  $no 	= 1;
-		                      
+ $num_rows = mysqli_num_rows ($query);
+ if($num_rows >0 ){	 	                      
 		                  while ($row = mysqli_fetch_array($query))
 		                  {
 			
@@ -26,13 +27,13 @@ $query = mysqli_query($conn, $sql);
 				            echo   '<td>'.$row['BillNo'].'</td>';
 					        echo  '<td>'.$row['ClientName'].'</td>';
 					        echo  '<td>'.$row['ClientAddress'].'</td>';
-					        echo  '<td>'.$row['ClientPhn'].'</td>';
-                           	echo  '<td>'.$row['PrintType'].'</td>';
+					        echo  '<td>'.$row['ClientPhn1'].'</td>';
+							echo  '<td>'.$row['PrintType'].'</td>';
+							echo     '<td></td>';
+							echo     '<td></td>';
+							echo     '<td></td>';
+							echo     '<td></td>';
                           	echo     '<td>'.$row['sft'].'</td>';
-                            echo     '<td>'.$row['PrintPrice'].'</td>';
-                            echo     '<td>'.$row['advance'].'</td>';
-                            echo      '<td>'.$row['due'].'</td>';
-                            echo     '<td>'.$row['intotal'].'</td>';
                             echo     '<td>'.$row['Todaydate'].'</td>';
                             echo     '<td>'.$row['Todaytime'].'</td>';
 
@@ -41,7 +42,10 @@ $query = mysqli_query($conn, $sql);
 			                $no++;
 		}
 
-
+	}
+	else{
+		echo '<p>NO Result Found</p>';
+	}
 
 
 

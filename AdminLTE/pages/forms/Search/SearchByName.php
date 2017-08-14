@@ -34,7 +34,7 @@
 
   <script src="../PrintReq/Workprocess.js"></script>
 
-  <title>AdminLTE 2 | Dashboard</title>
+  <title>RB_Software</title>
   <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
   <!-- Bootstrap 3.3.2 -->
   <link href="../../../bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -61,7 +61,7 @@
   <div class="wrapper">
 
     <header class="main-header">
-      <a href="../../../index2.html" class="logo"><b>Admin</b>LTE</a>
+      <a href="../../../index.php" class="logo"><b>RB_</b>Software</a>
       <!-- Header Navbar: style can be found in header.less -->
       <nav class="navbar navbar-static-top" role="navigation">
         <!-- Sidebar toggle button-->
@@ -139,7 +139,7 @@
       <!-- Content Header (Page header) -->
       <section class="content-header">
         <h1>
-          New Data Entry
+          Search By Name
 
         </h1>
         <ol class="breadcrumb">

@@ -41,7 +41,7 @@
 
   <script src="Workprocess.js"></script>
 
-  <title>AdminLTE 2 | Dashboard</title>
+  <title>RB_Software</title>
   <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
   <!-- Bootstrap 3.3.2 -->
   <link href="../../../bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
