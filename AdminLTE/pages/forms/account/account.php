@@ -89,11 +89,14 @@
       <div class="content-wrapper">
          <p class="search_input">
             <div class="box-footer">
+
               <form method="post" action="account.php">
-                <input type="hidden" name="submitted" value="true"/>
-                  <label>Search By BillNo:<input type="text" name="getbillno" /></label>
-                      <input type="submit" />
+                <input type="hidden"  name="submitted" value="true" />
+                  Search By BillNo:
+                  <input class="form-control" type="text" name="getbillno" /><br/>
+                      <input type="submit" class="btn btn-primary"/>
               </form>
+
             </div>
 
           </p>
@@ -178,28 +181,28 @@ $result2 = mysqli_query ($mysqli, $query2) or die ('error getting data from data
                   <div class="box-body">
 
                     <div class="form-group">
-                      <label for="exampleInputEmail1">Name</label>
-                      <input type="text" class="form-control" id="ClientName" value="<?php print isset($billNo) ? $billNo : '';?>">
+                      <label for="exampleInputEmail1">Bill No</label>
+                      <input type="text" class="form-control" id="ClientName" value="<?php print isset($billNo) ? $billNo : '';?>" disabled >
                     </div>
 
 
                      <div class="form-group">
                       <label for="exampleInputEmail1">Name</label>
-                      <input type="text" class="form-control" id="ClientName" placeholder="Client Name" value="<?php print isset($name) ? $name : '';?>">
+                      <input type="text" class="form-control" id="ClientName" placeholder="Client Name" value="<?php print isset($name) ? $name : '';?>" disabled >
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword1">Address</label>
-                      <input type="text" class="form-control" id="ClientAddress" placeholder="Address" value="<?php print isset($Address) ? $Address : '';?>">
+                      <input type="text" class="form-control" id="ClientAddress" placeholder="Address" value="<?php print isset($Address) ? $Address : '';?>" disabled >
                     </div>
 
                     <div class="form-group">
                       <label for="exampleInputPassword1">Phone No 1</label>
-                      <input type="number" class="form-control" id="ClientPhn1" placeholder="Phone Number" value="<?php print isset($PhoneNo1) ? $PhoneNo1 : '';?>">
+                      <input type="number" class="form-control" id="ClientPhn1" placeholder="Phone Number" value="<?php print isset($PhoneNo1) ? $PhoneNo1 : '';?>" disabled >
                     </div>
 
                     <div class="form-group">
                       <label for="exampleInputPassword1">Phone No 2</label>
-                      <input type="number" class="form-control" id="ClientPhn2" placeholder="Phone Number" value="<?php print isset($PhoneNo2) ? $PhoneNo2 : '';?>">
+                      <input type="number" class="form-control" id="ClientPhn2" placeholder="Phone Number" value="<?php print isset($PhoneNo2) ? $PhoneNo2 : '';?>" disabled >
                     </div>
                     
                   </div>
