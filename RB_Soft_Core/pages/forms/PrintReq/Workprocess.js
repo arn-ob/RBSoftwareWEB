@@ -1,6 +1,7 @@
   //create array that will hold all ordered products
     var shoppingCart = [];
     var cart_total_sft=0;
+    var temp = 0;
     var orderedProductsTblBody;
     
     //this function manipulates DOM and displays content of our shopping cart
@@ -30,7 +31,9 @@ function displayShoppingCart()
             var cellPrintType = row.insertCell(5);
             var cellsft = row.insertCell(6);
             var cellqunt = row.insertCell(7);
-            
+            var cellfileName = row.insertCell(8);
+            var PrintStatus = row.insertCell(9);
+            temp = shoppingCart[product].sft;
             
             
             //fill cells with values from current product object of our array
@@ -43,11 +46,14 @@ function displayShoppingCart()
             cellPrintType.innerHTML = shoppingCart[product].PrintType;
             cellsft.innerHTML = shoppingCart[product].sft;
             cellqunt.innerHTML = shoppingCart[product].Quantity;
+            cellfileName.innerHTML = shoppingCart[product].filename;
+            PrintStatus.innerHTML = shoppingCart[product].PrintStatus;
             
             count++;
-            cart_total_sft += cellsft;
+            
         }
-        
+        cart_total_sft += temp;
+        //document.getElementById("cart_total").innerHTML=cart_total_sft;
        
     }
 
@@ -66,11 +72,14 @@ function AddtoCart()
        singleProduct.Height=document.getElementById("PrintHeight").value;
        singleProduct.Wide=document.getElementById("PrintWide").value;
        singleProduct.Quantity=document.getElementById("PrintQuantity").value;
-       
+       singleProduct.PartyName=document.getElementById("PartyName").value;
+       singleProduct.filename = document.getElementById("fileName").value;
        
        singleProduct.sft = document.getElementById("PrintHeight").value * document.getElementById("PrintWide").value;
        singleProduct.AddedFrame=document.getElementById("Addedframe").value;
        
+       singleProduct.PrintStatus=document.getElementById("PrintStatus").value;
+
        shoppingCart.push(singleProduct);
        
        displayShoppingCart();
@@ -89,13 +98,13 @@ function AddtoCart()
          
          
 
-
+        if(shoppingCart != ""){
 
          
             for(var product in shoppingCart)
             {
 
-                var billNo = "1";
+                var billNo = GenerateRandomValue().toString();
                
                 var RECname = shoppingCart[product].Name.toString();
                 var RECaddress = shoppingCart[product].Addresss.toString();
@@ -107,8 +116,9 @@ function AddtoCart()
                 var RECsft = shoppingCart[product].sft.toString();
                 var RECQunt = shoppingCart[product].Quantity.toString();
                 var RECFrame = shoppingCart[product].AddedFrame.toString();
-               
-                
+                var RECpartyName = shoppingCart[product].PartyName.toString();
+                var RECfilename = shoppingCart[product].filename.toString();
+                var RECPrintStatus = shoppingCart[product].PrintStatus.toString();
                
                 var dataString = 'BillNo='+ billNo
                         + '&ClientName=' + RECname        
@@ -121,6 +131,10 @@ function AddtoCart()
                         + '&PrintQuantity=' + RECQunt
                         + '&sft=' + RECsft
                         + '&frame=' + RECFrame
+                        + '&totalSft=' + cart_total_sft
+                        + '&partyName=' + RECpartyName
+                        + '&filename=' + RECfilename
+                        + '&PrintStatus=' + RECPrintStatus
                         
                        
 
@@ -137,21 +151,25 @@ function AddtoCart()
                     success: function () 
                     {
                         
-                        alert('form was submitted');
-
+                        alert('Data Stored');
+                        ClearHtmlElement();     
                     }             
                 });
 
-                for(var timer = 0;timer<500;timer++){
+                for(var timer = 0;timer<1000;timer++){
                         console.log(timer);
                 }    
             }
             
-            
-      
-             ClearHtmlElement(); 
+        }else{
+            alert('List of item is Null');
+        }
+             // Give a refresh to Html
+             //ClearHtmlElement(); 
     }
 
+
+    // Invoice Print 
 function PrintElem()
         {
             var mywindow = window.open('', 'PRINT', 'height=400,width=600');
@@ -177,16 +195,12 @@ function PrintElem()
 
 function ClearHtmlElement()
 {
-
        document.getElementById("ClientName").value = "";
        document.getElementById("ClientAddress").value = "";
        document.getElementById("ClientPhn").value = "";
        document.getElementById("PrintHeight").value = "";
        document.getElementById("PrintWide").value = "";
        document.getElementById("PrintQuantity").value = "";
-       document.getElementById("PrintPrice").value = "";
-       document.getElementById("PrintAdvancePay").value = "";
-
 }
 
 
@@ -202,4 +216,45 @@ function GenerateRandomValue()
 }
 
 
+function CheckThenAdto(){
+   if(validateform()){
+        AddtoCart();
+   }
+}
 
+
+function validateform(){  
+    var name=document.myform.name.value;  
+    var address=document.myform.address.value;  
+    var PhoneNo=document.myform.PhoneNo.value;  
+    var wide=document.myformTwo.wide.value;  
+    var height=document.myformTwo.height.value;  
+    var quantity=document.myformTwo.quantity.value;  
+    var fileName=document.myformTwo.fileName.value;  
+    //var PhoneNo=document.myformTwo.PhoneNo.value;  
+      
+    if (name==null || name== ""){  
+      alert("Name can't be blank");  
+      return false;  
+    }else if(address == null || address ==""){  
+      alert("Address is blank");  
+      return false;  
+    }else if(PhoneNo == null || PhoneNo == ""){  
+        alert("Phone Number is Blank . Check the Phone Number");  
+        return false;  
+    }else if(wide == null || wide == ""){  
+        alert("Wide is Blank . Check the Wide ");  
+        return false;  
+    }else if(height == null || height == ""){  
+        alert("Height is blank . Check the Height");  
+        return false;  
+    }else if(quantity == null || quantity == ""){  
+        alert("Quantity is blank . Check the Quantity");  
+        return false;  
+    }else if(fileName == null || fileName == ""){  
+        alert("File Name is blank . Check the File Name");  
+        return false;  
+    }else{
+          return true;
+      } 
+}

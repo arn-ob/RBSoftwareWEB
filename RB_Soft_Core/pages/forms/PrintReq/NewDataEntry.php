@@ -149,42 +149,51 @@
                   <h3 class="box-title">Client Details</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form role="form">
+                <form role="form" name="myform">
                   <div class="box-body">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Name</label>
-                      <input type="text" class="form-control" id="ClientName" placeholder="Client Name">
+                      <input type="text" class="form-control" id="ClientName" name="name" placeholder="Client Name" >
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword1">Address</label>
-                      <input type="text" class="form-control" id="ClientAddress" placeholder="Address">
+                      <input type="text" class="form-control" id="ClientAddress" name="address" placeholder="Address">
                     </div>
 
                     <div class="form-group">
                       <label for="exampleInputPassword1">Phone No 1</label>
-                      <input type="number" class="form-control" id="ClientPhn1" placeholder="Phone Number">
+                      <input type="number" class="form-control" id="ClientPhn1" name="PhoneNo" placeholder="Phone Number">
                     </div>
 
                     <div class="form-group">
-                      <label for="exampleInputPassword1">Phone No 2</label>
+                      <label for="exampleInputPassword1">Phone No 2 (Optional)</label>
                       <input type="number" class="form-control" id="ClientPhn2" placeholder="Phone Number">
                     </div>
                     
                     <div class="form-group">
-                      <label for="exampleInputPassword1">Party Name</label>
-                      <input type="number" class="form-control" id="PartyName" placeholder="Party Name">
+                      <label for="exampleInputPassword1">Party Name (Optional)</label>
+                      <input type="text" class="form-control" id="PartyName" placeholder="Party Name">
                     </div>
                    
+                    <div class="form-group">
+                      <label>Select Print Status</label>
+                      <select class="form-control" id="PrintStatus">
+                        <option>Design Complete</option>
+                        <option>Design Processing</option>
+                        <option>Printing</option>
+                        <option>Editing</option>
+                      </select>
+                    </div>
 
 
                   </div><!-- /.box-body -->
 
                   <div class="box-footer">
-                    <input name="SendValue" type="button" value="Add to list" onclick="AddtoCart()" class="btn btn-primary"></input>
+                    <input name="SendValue" type="button" value="Add to list" onclick="CheckThenAdto()" class="btn btn-primary"></input>
                     
                     <input name="ClearField" type="button" value="Clear Field" onclick="ClearHtmlElement()" class="btn btn-default"></input>
                     
-                    <input name="submit" type="submit" value="Submit" onclick="record()" class="btn btn-default" ></input>
+                    <input name="submitData" type="button" value="Submit Data" onclick="record()" class="btn btn-default" ></input>
         
                   
                   </div>
@@ -202,11 +211,11 @@
                   <h3 class="box-title">Print Details</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <form role="form">
+                  <form role="form" name="myformTwo">
                     <!-- text input -->
                     <div class="form-group">
                       <label>Select Print Type</label>
-                      <select class="form-control" id="PrintType">
+                      <select class="form-control" id="PrintType" name="type">
                         <option>PVC</option>
                         <option>Pana</option>
                         <option>Stiker</option>
@@ -214,25 +223,32 @@
                       </select>
                     </div>
                     
-                     <div class="form-group">
-                      <label for="exampleInputPassword1">Height</label>
-                      <input type="number" class="form-control" id="PrintHeight" placeholder="Height">
-                    </div>
-
+                     
 
                     <div class="form-group">
                       <label for="exampleInputPassword1">Wide</label>
-                      <input type="number" class="form-control" id="PrintWide" placeholder="Wide">
+                      <input type="number" class="form-control" id="PrintWide" placeholder="Wide" name="wide">
                     </div>
                     
                     <div class="form-group">
+                      <label for="exampleInputPassword1">Height</label>
+                      <input type="number" class="form-control" id="PrintHeight" placeholder="Height" name="height">
+                    </div>
+
+
+                    <div class="form-group">
                       <label for="exampleInputPassword1">Quantity</label>
-                      <input type="number" class="form-control" id="PrintQuantity" placeholder="Number Of Print Copy">
+                      <input type="number" class="form-control" id="PrintQuantity" placeholder="Number Of Print Copy" name="quantity">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">File Name</label>
+                      <input type="text" class="form-control" id="fileName" placeholder="File Name" name="fileName">
                     </div>
                     
 
                     <div class="form-group">
-                      <label>Frame Added</label>
+                      <label>Frame Added (Optional)</label>
                       <select class="form-control" id="Addedframe">
                         <option>Yes</option>
                         <option selected>No</option>
@@ -240,24 +256,6 @@
                     </div>
 
 
-                    <!--
-                      // Account Section 
-                    <div class="form-group">
-                      <label for="exampleInputPassword1">Price</label>
-                      <input type="number" class="form-control" id="PrintPrice" placeholder="Price per ft">
-                    </div>
-
-                    <div class="form-group">
-                      <label for="exampleInputPassword1">Advance Pay</label>
-                      <input type="number" class="form-control" id="PrintAdvancePay" placeholder="Advance">
-                    </div>  
-
-                    <div class="form-group">
-                      <label for="exampleInputPassword1">Frame Price</label>
-                      <input type="number" class="form-control" id="framePrice" placeholder="Advance">
-                    </div>  
-
-                   -->
 
                   </form>
                 </div><!-- /.box-body -->
@@ -287,10 +285,13 @@
                       <th style="width: 10px">#</th>
                       <th>Name</th>
                       <th>Address</th>
-                      <th>Phone No</th>
+                      <th>Phone No 1</th>
+                      <th>Phone No 2</th>
                       <th>Print Type</th>
                       <th>SFT</th>
                       <th>Quantity</th>
+                      <th>FileName</th>
+                      <th>Print Status</th>
                       
                      
                     </tr>
@@ -307,6 +308,9 @@
                          <td></td>
                          <td></td>
                          <td></td>
+                         <td></td>
+                         <td></td>
+                         <!--<td colspan="3" align="right" id="cart_total"></td> -->
                       </tr>
                     </tfoot>
 
