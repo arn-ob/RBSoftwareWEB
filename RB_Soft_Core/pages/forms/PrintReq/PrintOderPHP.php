@@ -59,20 +59,23 @@ $clientDetailsInsertSQL = "INSERT INTO clientdetails (name, address, phoneNo1, p
                             VALUES ('$ClientName', '$ClientAddress', '$TotalSft', '$ClientPhnNo2', '$EntrybillNo', '$partyName', '$date', '$time')";
  
  
-$PrintDetailsSQL = "INSERT INTO printdetails (BillNo, PrintType, wide, height, sft, Frame, CreatedTime, CreatedDate, FileName) 
-                        VALUES ('$EntrybillNo', '$PrintType', '$PrintWide', '$PrintHeight', '$Sft', '$frame', '$time', '$date', '$fileName')";
+$PrintDetailsSQL = "INSERT INTO printdetails (BillNo, PrintType, wide, height, sft, quantity, Frame, CreatedTime, CreatedDate, FileName) 
+                        VALUES ('$EntrybillNo', '$PrintType', '$PrintWide', '$PrintHeight', '$Sft','$PrintQuntity', '$frame', '$time', '$date', '$fileName')";
 
-$printStatusSQL  = "INSERT INTO printstatus (BilNo, ClientName, FileName,sft, CreatedDate, CreatedTime, Status) 
-                    VALUES ('$EntrybillNo', '$ClientName', '$fileName', '$Sft', '$date', '$time', '$PrintStatus')";
+$printStatusSQL  = "INSERT INTO printstatus (BilNo, ClientName, FileName, sft , quantity, CreatedDate, CreatedTime, Status) 
+                    VALUES ('$EntrybillNo', '$ClientName', '$fileName', '$Sft', '$PrintQuntity', '$date', '$time', '$PrintStatus')";
 
-   if ($conn->query($clientDetailsInsertSQL) === TRUE) 
+$printSummary = "";   
+
+// Storing Data
+if ($conn->query($clientDetailsInsertSQL) === TRUE) 
    {
         if ($conn->query($PrintDetailsSQL) === TRUE) {
 
             if ($conn->query($printStatusSQL) === TRUE) {
 
                 echo "Data Entry Done";
-                
+
             }
         }
    } else {

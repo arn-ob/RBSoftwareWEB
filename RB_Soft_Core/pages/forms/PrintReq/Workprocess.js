@@ -152,7 +152,7 @@ function AddtoCart()
                     {
                         
                         alert('Data Stored');
-                        ClearHtmlElement();     
+                        location.reload(true); 
                     }             
                 });
 
